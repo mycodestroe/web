@@ -1,4 +1,4 @@
-# ES6
+# ES6(不限于ES6)
  ### 解构赋值
  #### 数组的解构赋值
  
@@ -51,4 +51,23 @@
   4. padStart()、padEnd() 指定字符串长度并补齐
   5. trim() trimStart(), trimEnd() 消除字符串空格
   
-### 
+### 正则表达式
+### 数值的扩展
+  1. Number.isFinite() 如果参数类型不是数值 返回false finite有限的 Infinity 无穷的
+  2. Number.isNaN() 如果参数类型不是NaN 返回false
+  3. Number.parseInt()
+  4. Number.parseFloat()
+  5. Number.isInteger() 判断一个数值是否为整数
+  6. Math.trunc() 去除一个数的小数部分返回整数部分 非数值先转换为数值 无法截取的值或空返回NaN
+  7. Math.sign() 判读一个数是正数、负数或者0 返回值有五种+1、-1、0、-0、NaN
+  
+### 函数的扩展
+  1. 函数参数可以设置默认值
+  ```ecmascript 6
+     function sum(x=0, y=0) {
+       return x + y
+     }
+     sum() //0
+     sum(1) //1
+     sum(1, 1) //2
+```
