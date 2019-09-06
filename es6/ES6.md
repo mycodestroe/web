@@ -110,7 +110,7 @@
   12. flat() 将嵌套数组变为一个新数组 对数据没影响
   12. flat() 默认只会拉平一层 如果想拉平多层 参数为拉平数字 Infinity 拉平所有嵌套 碰到空位跳过
   13. flaMap() 对原数组的每一个成员执行一个函数相当于map() 
-  14. 数组的空
+  14. 数组的空位 空位指数组的某一位置没有任何值
   ````ecmascript 6
      let arrA = [1, 2, 3]
      let arrB = [4, 5, 6]
@@ -123,4 +123,22 @@
      [1, 2 ,3 ,4].copyWithin('开始替换位置', '读取数据下标', '停止读取数据下标') 
      [1].fill('填充值', '填充开始位置', '填充结束位置')
 ````
+ 
+### 七、 对象的扩展
+  1. ES6可以直接写入变量和函数，作为对象的属性和方法。
+  2. 可枚举性 对象的每个属性都有一个描述对象用来控制该属性的行为
+  3. Object.getOwnPropertyDescriptor 可以获取改属性的描述对象
+  4. enumerable 可枚举性 如果该属性为false 某些操作会忽略当前属性
+  5. 以下四个操作会忽略enumerable为false：
   
+     - for...in循环：只遍历对象自身的和继承的可枚举的属性
+     - Object.keys(): 返回对象自身的所有可枚举的属性的键名
+     - JSON.stringify(): 只串行化对象自身的可枚举的属性
+     - Object.assign(): 忽略enumerable为false的属性只拷贝对象自身的可枚举属性
+     - 当只关心对象自身属性时建议用Object.keys
+  ```ecmascript 6
+     let obj = {foo: 123}
+     Object.getOwnPropertyDescriptor(obj, 'foo')
+     // {value: 123, writable: true, enumerable: true, configurable: true}
+
+  ```
