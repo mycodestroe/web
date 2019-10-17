@@ -109,5 +109,98 @@ https://www.baidu.com:80/index.html
 不能读取对方资源。可以隔离潜在恶意文件。
 页面中的链接（src href iframe）、重定向、表单提交不受同源策略限制
 
-18. 跨域
-答：jsonp跨域（）
+18. 跨域资源共享（CORS）
+答：需要使用跨域的情况  
+XMLHttpRequest或Fetch(基于Promise设计支持async/await)发起的跨域HTTP请求
+css引入外部字体（@font-face）
+WebGL贴图（3D绘图标准）
+使用drawImage将Images/Video绘制到Canvas
+
+19. 跨域方法  
+答：jsonp原理 由于src等属性不受同源策略约束 可以动态创建script设置src为网址加参数实现跨域  
+jsonp只能实现get请求
+```html
+<script>
+   var script = document.createElement('script')
+   script.type= 'text/jsvascript'
+   //callback 传给服务器回调函数名 服务器返回回调函数的调用 数据为回调函数的参数
+   script.src='http://www.test.com:8080/login?user=admin&callback=onBack'
+   //回调执行函数
+   function onBack(res) {
+     console.log(JSON.stringify(res))
+   }
+</script>
+```
+jquery ajax 封装jsonp跨域
+```javascript
+   $.ajax({
+      url: 'http://www.test.com:8080/login',
+      type: 'GET',
+      data: {},
+      dataType: 'jsonp',
+      jsonpCallback: 'onBack',//自定义回调函数名
+      success: function(res) {
+        console.log(res)
+      }
+   })
+```
+
+vue jsonp
+```ecmascript 6
+  this.$http.jsonp('http://www.test.com:8080/login',{
+    params: {},
+    jsonp: 'callback' //默认传callback
+  }).then((res) => {
+     console.log(res)
+  })
+```
+vue 代理 proxy跨域
+```javascript
+   module.exports = {
+      proxy: {
+           '/api': {
+             target: 'http://www.test.com',
+             changeOrigin: true,
+             pathRewrite: {
+               '^/api': '/'
+             }
+           }
+         }
+   }
+```
+iframe(标签元素会创建一个包含另外一个文档的内联框架 iframe标签里的内容会在浏览器不支持  
+iframe的情况下显示) 跨域  
+后台响应设置Access-Control-Allow-Origin允许跨域访问  
+WebSocket（双工通信，允许跨域） 协议跨域 可以使用Socket.io操作
+
+20. 前端工程化  
+答：开发规范（es6规范）  
+模块化开发（闪购模块 积分兑换模块等）  
+组件化开发（同一项目内可复用代码）  
+性能优化 （减少无用代码消耗）  
+项目部署 （上传远端仓库 服务器拉取代码）  
+开发流程 （按流程按计划推进项目开发）  
+开发工具 （webpack打包项目）  
+前端工程化有两层含义：  
+广义的前端工程化（前端工程是软件工程的一个子类，指的是将软件工程的方法和原理运用在前端开发中，目的是  
+实现 高效开发、有效协同、质量可控。）
+狭义的前端工程化（前端工程是将 开发阶段 的代码转变成 生产环境 的代码的 一系列步骤。主要包括  
+构建 分支管理 自动化测试 部署等）
+一般说前端工程化指狭义工程化
+
+21. 哈希表  
+答：散列表（哈希表），是根据关键码值直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中  
+一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。
+
+22. 堆和栈
+答：变量都存在内存中 内存给变量开辟了两块区域，栈区域和堆区域  
+栈的特点 开口向上、速度快、容量小。  
+堆的特点 速度稍慢、容量比较大。
+基本数据类型都存放在栈区域  
+引用数据类型都存放在堆区域（栈存储引用类型的指针 指向堆存储的引用类型的值）
+ 
+23. 浅拷贝和深拷贝  
+答：浅拷贝仅仅是将引用类型的指针赋值给新的变量 深拷贝将引用类型的值（每一层）赋值给新的变量。
+
+xx. 内存泄露
+
