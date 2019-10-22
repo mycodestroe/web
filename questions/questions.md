@@ -204,28 +204,91 @@ WebSocket（双工通信，允许跨域） 协议跨域 可以使用Socket.io操
 
 24. 深拷贝的方法  
 答：深拷贝数组：  
-    数组内容为基本类型时 可以用for循环遍历push新数组（第一层拷贝）  
-    slice()方法不改变原数组，返回两个下标之间截取的元素为新数组元素（第一层拷贝）  
-    当slice无参数时返回一个与原数组相同的新数组(仅拷贝数组第一层，当数组元素为对象时依然存储的是对象指针)
-    concat 同slice类似（第一层拷贝）  
-    真正的深拷贝：遍历复杂数据的每一项（工程庞大不推荐）
-    JSON.parse(JSON.stringify(obj))
-    ```ecmascript 6
-       let arrayA = [{a: '1'}]
-       let arrayB = []
-       arrayB = arrayA
-       console.log(arrayB) //[{a: '1'}] 浅拷贝
-       let arrayC = arrayA.slice() // 深拷贝（一层）
-       console.log(arrayC) //[{a: '1'}]
-       arrayC.push({b: '1'})
-       console.log(arrayA) //[{a: '1'}]
-       console.log(arrayC) //[{a: '1'}, {b: '1'}]
-       arrayC[0].a = '2'
-       console.log(arrayA) //[{a: '2'}]
-       console.log(arrayC) //[{a: '2'}, {b: '1'}]
-```
+数组内容为基本类型时 可以用for循环遍历push新数组（第一层拷贝）  
+slice()方法不改变原数组，返回两个下标之间截取的元素为新数组元素（第一层拷贝）  
+当slice无参数时返回一个与原数组相同的新数组(仅拷贝数组第一层，当数组元素为对象时依然存储的是对象指针)
+concat Object.assgin()同slice类似（第一层拷贝） 
+真正的深拷贝：遍历复杂数据的每一项（工程庞大不推荐）
+JSON.parse(JSON.stringify(obj)) // 值 undefined function symbol 被忽略不拷贝
+jquery $.extend([deep], target, object1, [,objectN]) //deep 为布尔值
+```ecmascript 6
+   let arrayA = [{a: '1'}]
+   let arrayB = []
+   arrayB = arrayA
+   console.log(arrayB) //[{a: '1'}] 浅拷贝
+   let arrayC = arrayA.slice() // 深拷贝（一层）
+   console.log(arrayC) //[{a: '1'}]
+   arrayC.push({b: '1'})
+   console.log(arrayA) //[{a: '1'}]
+   console.log(arrayC) //[{a: '1'}, {b: '1'}]
+   arrayC[0].a = '2'
+   console.log(arrayA) //[{a: '2'}]
+   console.log(arrayC) //[{a: '2'}, {b: '1'}]
+``` 
+25. window.requestAnimationFrame(callback) 在浏览器中运行一个动画
+```ecmascript 6
+var start = null;
+var element = document.getElementById('SomeElementYouWantToAnimate');
+element.style.position = 'absolute';
 
-    
+function step(timestamp) { //timestamp 回调被传入参数 表示开始去执行回调函数的时刻
+  if (!start) start = timestamp;
+  var progress = timestamp - start;
+  element.style.left = Math.min(progress / 10, 200) + 'px';
+  if (progress < 2000) {
+    window.requestAnimationFrame(step);
+  }
+}
+//回调函数执行次数通常是每秒60次 与浏览器刷新率匹配
+let  ID = window.requestAnimationFrame(step); //返回值 一个long整数，请求ID 是回调列表中唯一的标识  
+window.mozCancelAnimationFrame(ID) //可以取消这个动画
+```
+26. 移动端适配
+答：
+绝对单位（固定物理大小）： px 像素单位
+相对单位(相对当前对象内文本的字体尺寸):   
+em：基准点为父节点字体的大小如果自身定义了font-size按自身计算(浏览器默认1em = 16px)  
+rem: 相对根节点html的字体大小计算（html font-size）  
+百分比相对单位：
+vw: viewpoint width 视窗宽度 1vw等于视窗宽度的1%
+vh: viewpoint height 视窗高度 1vh等于视窗高的1%
+%: 相对于父元素的百分比值。  
+通过媒体查询的方式 @media screen and (min-width : 600px) {//写css样式}  
+flex弹性布局  
+
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+```
+rem + viewport 根据屏幕宽度设定rem值 需要适配的元素都使用rem，不需要适配的使用px(1em = 16px)
+Flexible + rem
+vw布局
+vw+rem 优化布局
+```
+// rem 单位换算：定为 75px 只是方便运算，750px-75px、640-64px、1080px-108px，如此类推
+$vw_fontsize: 75; // iPhone 6尺寸的根元素大小基准值
+@function rem($px) {
+     @return ($px / $vw_fontsize ) * 1rem;
+}
+
+// 根元素大小使用 vw 单位
+$vw_design: 750;
+html {
+    font-size: ($vw_fontsize / ($vw_design / 2)) * 100vw; 
+    // 同时，通过Media Queries 限制根元素最大最小值
+    @media screen and (max-width: 320px) {
+        font-size: 64px;
+    }
+    @media screen and (min-width: 540px) {
+        font-size: 108px;
+    }
+}
+
+// body 也增加最大最小宽度限制，避免默认100%宽度的 block 元素跟随 body 而过大过小
+body {
+    max-width: 540px;
+    min-width: 320px;
+}
+```
 xx. 内存泄露
 
 xx. 八小时时区
