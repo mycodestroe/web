@@ -202,5 +202,30 @@ WebSocket（双工通信，允许跨域） 协议跨域 可以使用Socket.io操
 23. 浅拷贝和深拷贝  
 答：浅拷贝仅仅是将引用类型的指针赋值给新的变量 深拷贝将引用类型的值（每一层）赋值给新的变量。
 
+24. 深拷贝的方法  
+答：深拷贝数组：  
+    数组内容为基本类型时 可以用for循环遍历push新数组（第一层拷贝）  
+    slice()方法不改变原数组，返回两个下标之间截取的元素为新数组元素（第一层拷贝）  
+    当slice无参数时返回一个与原数组相同的新数组(仅拷贝数组第一层，当数组元素为对象时依然存储的是对象指针)
+    concat 同slice类似（第一层拷贝）  
+    真正的深拷贝：遍历复杂数据的每一项（工程庞大不推荐）
+    JSON.parse(JSON.stringify(obj))
+    ```ecmascript 6
+       let arrayA = [{a: '1'}]
+       let arrayB = []
+       arrayB = arrayA
+       console.log(arrayB) //[{a: '1'}] 浅拷贝
+       let arrayC = arrayA.slice() // 深拷贝（一层）
+       console.log(arrayC) //[{a: '1'}]
+       arrayC.push({b: '1'})
+       console.log(arrayA) //[{a: '1'}]
+       console.log(arrayC) //[{a: '1'}, {b: '1'}]
+       arrayC[0].a = '2'
+       console.log(arrayA) //[{a: '2'}]
+       console.log(arrayC) //[{a: '2'}, {b: '1'}]
+```
+
+    
 xx. 内存泄露
 
+xx. 八小时时区
