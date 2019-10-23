@@ -254,15 +254,14 @@ vw: viewpoint width 视窗宽度 1vw等于视窗宽度的1%
 vh: viewpoint height 视窗高度 1vh等于视窗高的1%
 %: 相对于父元素的百分比值。  
 通过媒体查询的方式 @media screen and (min-width : 600px) {//写css样式}  
-flex弹性布局  
-
+@media screen and (orientation: landscape) {} //手机横屏样式
 ```html
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 ```
-rem + viewport 根据屏幕宽度设定rem值 需要适配的元素都使用rem，不需要适配的使用px(1em = 16px)
-Flexible + rem
-vw布局
-vw+rem 优化布局
+rem适配（Flexible手淘）根据屏幕宽度设定rem值 需要适配的元素都使用rem，不需要适配的使用px(1em = 16px)
+vw适配  将设计稿中的px转换为vw即可，可以使用postcss转换（推荐）
+
+rem+vw 适配方案（默认设置html font-size 13.333333 或 26.333333）
 ```
 // rem 单位换算：定为 75px 只是方便运算，750px-75px、640-64px、1080px-108px，如此类推
 $vw_fontsize: 75; // iPhone 6尺寸的根元素大小基准值
@@ -290,5 +289,3 @@ body {
 }
 ```
 xx. 内存泄露
-
-xx. 八小时时区
