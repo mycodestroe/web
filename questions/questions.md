@@ -288,5 +288,32 @@ body {
     min-width: 320px;
 }
 ```
-xx. 哪些操作会引起浏览器重绘和重排
-xx. 内存泄露
+27. vue 生命周期
+答：beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestroy、destoryed
+28. es6和es5有什么区别  
+答：es6新增块级作用域 关键字let 常量const  
+对象字面量的属性赋值简写
+定义变量可以解构赋值
+函数可以设置默认值参数 可以确保多种调用情况
+增加了Generator函数
+增加了Class
+定义了Modules
+新增了Map、Set、WeakMap、WeakSet 四种集合类型
+新增了一些API
+新增了Proxies 代理监听
+新增了Symbol 基本数据类型
+新增了Promise 对象
+新增了箭头函数
+29. Promise函数的异步
+答：Promise函数是处理异步操作的对象 可以使用链式调用来获取数据
+30. 对node的理解
+答：node.js是一个基于Chrome V8 引擎的JavaScript运行时
+31. express和koa2有什么区别
+答：koa2与express提供的API大致相同，express是大而全，内置了大多数的中间件。koa2不绑定任何的框架，更加简洁
+方便实现定制化、扩展性好。
+32. 设计模式
+33. 常用算法
+34. 图形学
+35. webgl 、Threejs
+答：WebGL是在浏览器中实现三维效果的一套规范
+36. TCP/IP 工作原理
