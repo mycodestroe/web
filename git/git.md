@@ -3,7 +3,7 @@
  * @Author: wangdelei
  * @Date: 2021-07-07 10:03:25
  * @LastEditors: wangdelei
- * @LastEditTime: 2021-09-06 15:30:39
+ * @LastEditTime: 2021-09-16 15:41:33
 -->
 ### git init "在本地初始化git仓库"
 ### git add file "添加文件到暂存区"
@@ -40,3 +40,5 @@
 ### git remote set-url origin "新地址" "更改本地仓库的远程地址"
 ### git remote prune origin "远程分支删除后 本地同步远程分支"
 ### git cherry-pick '版本号' "将其他分支提交代码拉到本分支"
+### git git stash 暂存当前修改 可以切换分支后释放
+### git stash pop 在当前分支释放最后一次暂存 释放后会删除记录
