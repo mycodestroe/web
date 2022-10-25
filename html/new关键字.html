@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>手写new</title>
+    </head>
+    <body>
+        <script>
+            function Person(name, age) {
+                this.name = name;
+                this.age = age;
+                this.sayHello = function () {
+                    console.log(`Hello ${this.name}`);
+                };
+            }
+            const person1 = new Person('jimmy', 30);
+            console.log(person1.name);
+            // 实现上述new关键字功能
+            function newObj(fn, ...args) {
+                console.log(fn.prototype);
+                const obj = {};
+                obj.__proto__ = fn.prototype;
+                // fn.call(obj, ...args); // 平铺参数
+                fn.apply(obj, args); // 参数是数组
+                console.log(args);
+                return obj;
+            }
+            const person2 = newObj(Person, 'wang', 30);
+           person2.sayHello()
+        </script>
+    </body>
+</html>

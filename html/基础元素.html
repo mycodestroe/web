@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>菜鸟教程</title>
+        <style>
+            .parent {
+                visibility: hidden;
+            }
+            .child {
+                visibility:visible;
+            }
+            .sticky {
+                position: sticky;
+                top: 0px;
+                left: 0;
+                background: black;
+                color: white;
+            }
+            .triangle {
+                width: 50px;
+                height: 50px;
+                border: 20px solid red;
+                border-top-color: pink;
+                border-left-color: green;
+                border-right-color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>我的第一个标题</h1>
+        <div class="triangle"></div>
+        <p class="sticky">我的第一个段落</p>
+        <p>我的第二个段落</p>
+        <p class="parent">
+            我是父级盒子我设置了不可见
+            <p>我是子级盒子父级盒子设置了visibility不可见 但是我设置了visibility可见</p>
+        </p>
+        <table>
+            <tr>
+                <td>我是第一行第一列</td>
+                <td>我是第一行第二列</td>
+                <td>我是第一行第三列</td>
+            </tr>
+            <tr>
+                <td>我是第二行第一列</td>
+                <td>我是第二行第二列</td>
+                <td>我是第二行第三列</td>
+            </tr>
+            <tr>
+                <td>我是第三行第一列</td>
+                <td>我是第三行第二列</td>
+                <td>我是第三行第三列</td>
+            </tr>
+        </table>
+        <form action="">
+            <label for="male">男</label>
+            <input type="radio" name="sex" id="male">
+            <label for="female">女</label>
+            <input type="radio" name="sex" id="female">
+            <label for="name">请输入姓名</label>
+            <input type="text" id="name">
+        </form>
+        <a href="tel:110">110</a>
+    </body>
+</html>

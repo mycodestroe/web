@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>防抖节流</title>
+    </head>
+    <body>
+        <button id="debounceBtn">防抖按钮</button>
+        <button id="throttleBtn">节流按钮</button>
+        <script>
+            var timer;
+            var timer1;
+            // 防抖
+            function debounce(fn, delay = 500) {
+                if (timer) {
+                    return;
+                }
+                timer = setTimeout(() => {
+                    fn();
+                    timer = null;
+                }, delay);
+            }
+            // 节流
+            function throttle(fn, delay = 500) {
+                if (timer1) {
+                    return;
+                }
+                fn();
+                timer1 = setTimeout(() => {
+                    timer1 = null;
+                }, delay);
+            }
+            const debounceDOM = document.getElementById('debounceBtn');
+            const throttleDOM = document.getElementById('throttleBtn');
+            const debounceFn = (a) => {
+                console.log('我是防抖按钮' + a);
+            };
+            const throttleFn = (a) => {
+                console.log('我是节流按钮' + a);
+            };
+            debounceDOM.addEventListener('click', function () {
+                debounce(() => {
+                    debounceFn(123);
+                }, 1000);
+            });
+            throttleDOM.addEventListener('click', function () {
+                throttle(throttleFn, 1000);
+            });
+        </script>
+    </body>
+</html>

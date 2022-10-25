@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>setInterval</title>
+    </head>
+    <body>
+        <button id="debounceBtn">开始计时</button>
+        <script>
+            // 使用setTimeout模拟setInterval
+            const debounceDOM = document.getElementById('debounceBtn');
+
+            function Interval(fn, delay) {
+                var clear;
+                fn();
+                const timeout = () => {
+                    fn();
+                    clear = setTimeout(timeout, delay);
+                };
+                setTimeout(timeout, delay);
+                return () => {
+                    clearTimeout(clear);
+                };
+            }
+            const fn = () => {
+                console.log('setTimeout模拟setInterval');
+            };
+            debounceDOM.addEventListener('click', () => {
+                const clear = Interval(fn, 1000);
+                setTimeout(() => {
+                    clear();
+                }, 5000);
+            });
+        </script>
+    </body>
+</html>

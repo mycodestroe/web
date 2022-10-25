@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>instanceof</title>
+    </head>
+    <body>
+        <script>
+            function Person(name, age) {
+                this.name = name;
+                this.age = age;
+                this.sayHello = function () {
+                    console.log(`Hello ${this.name}`);
+                };
+            }
+            const person1 = new Person('jimmy', 30);
+            console.log(person1 instanceof Person);
+            const person2 = {}
+            person2.__proto__ = Person.prototype
+            console.log(person2 instanceof Person)
+            function MyInstanceof(child, father) {
+                const fp = father.prototype;
+                var cp = child.__proto__;
+                while(cp) {
+                    if (cp === fp) {
+                        return true
+                    }
+                    cp = cp.__proto__;
+                }
+                return false;
+            }
+            console.log(MyInstanceof(person1, Person))
+            console.log(MyInstanceof(person2, Person))
+        </script>
+    </body>
+</html>

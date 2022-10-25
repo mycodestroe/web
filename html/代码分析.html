@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>面试题</title>
+    </head>
+    <body>
+        <script>
+            //1. 描述下列代码的执行结果
+            // foo(typeof a);
+            // function foo(p) {
+            //     console.log(this); // window
+            //     console.log(p); // undefined
+            //     console.log(typeof b); // Uncaught ReferenceError: Cannot access 'b' before initialization
+            //     let b = 0; // let const 不存在变量提升
+            // }
+
+            //2. 描述下列代码的执行结果
+            // class Foo {
+            //     constructor(arr) {
+            //         this.arr = arr;
+            //     }
+            //     bar(n) {
+            //         return this.arr.slice(0, n); // 返回被删除的元素数组 不改变原数组
+            //     }
+            // }
+            // var f = new Foo([0, 1, 2, 3]);
+            // console.log(f.bar(1)); // [0]
+            // console.log(f.bar(2).splice(1, 1)); // [0,1] => [1] splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目 会改变原始数组。
+            // console.log(f.arr); //[0,1,2,3]
+
+            //3. 描述下列代码的执行结果
+            // function f(count) {
+            //     console.log(`foo${count}`);
+            //     setTimeout(() => {
+            //         console.log(`bar${count}`);
+            //     });
+            // }
+            // f(1);
+            // f(2);
+            // setTimeout(() => {
+            //     f(3);
+            // });
+            // foo1 -> foo2 -> bar1 -> bar2 -> foo3 -> bar3
+
+            //4. 描述下列代码的执行结果
+            // var a = 2;
+            // var b = 5;
+            // console.log(a === 2 || (1 && b === 3) || 4); // true
+
+            //5. 冒泡排序
+            // const arr = [1, 2, 3, 5, 6, 7, 1, 2, 3, 5, 2, 8, 2];
+            // const bSort = (arr) => {
+            //     const len = arr.length;
+            //     for (let i = 0; i < len -1; i++) {
+            //         for (let j = i + 1; j < len; j++) {
+            //             if (arr[i] > arr[j]) {
+            //                 let temp = arr[i];
+            //                 arr[i] = arr[j];
+            //                 arr[j] = temp;
+            //             }
+            //         }
+            //     }
+            //     return arr
+            // };
+            // console.log(bSort(arr)); // [1, 1, 2, 2, 2, 2, 3, 3, 5, 5, 6, 7, 8]
+            //6. 数组降维
+            // const flat = (arr, deep = 1) => {
+            //     var newArr = [];
+            //     arr.forEach((item) => {
+            //         if (Array.isArray(item) && deep > 0) {
+            //             newArr = newArr.concat(flat(item, deep - 1));
+            //         } else {
+            //             newArr.push(item);
+            //         }
+            //     });
+            //     return newArr;
+            // };
+            // console.log(flat([1, 2, [3, 4, [5, 6]]]))
+            // console.log(flat([1, , 2, [3, 4, [5, 6]]], 2))
+            // console.log(flat([1, 2, [1, 2, [3, [5], 6]], 3, [7, 4]], 1));
+            // 7. promise 代码题
+            // new Promise((resolve, reject) => {
+            //     reject(1);
+            //     console.log(2);
+            //     resolve(3);
+            //     console.log(4);
+            // })
+            //     .then((res) => {
+            //         console.log(res);
+            //     })
+            //     .catch((res) => {
+            //         console.log('reject1');
+            //     });
+            // try {
+            //     new Promise((resolve, reject) => {
+            //         throw 'error';
+            //     })
+            //         .then((res) => {
+            //             console.log(res);
+            //         })
+            //         .catch((res) => {
+            //             console.log('reject2');
+            //         });
+            // } catch (err) {
+            //     console.log(err);
+            // }
+            // 2;
+            // 4
+            // reject1
+            // reject2;
+        </script>
+    </body>
+</html>
