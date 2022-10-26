@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>缓存函数</title>
+    </head>
+    <body>
+        <script>
+            //设计一个缓存函数 容量size 容量满了新插入覆盖最长时间未使用数据 存入数据和取出数据
+            function LRUCache(size) {
+                this.size = size;
+                this.cache = new Map();
+                this.get = function (key) {
+                    const hasKey = this.cache.has(key);
+                    if (!hasKey) {
+                        return `key:${key} 不存在`;
+                    }
+                    const val = this.cache.get(key);
+                    this.cache.delete(key);
+                    this.cache.set(key, val);
+                    return `key:${key} val:${val}`;
+                };
+                this.put = function (key, val) {
+                    const hasKey = this.cache.has(key);
+                    if(hasKey) {
+                        this.cache.delete(key)
+                    }
+                    this.cache.set(key, val)
+                    console.log(111, this.cache.keys().next())
+                    if(this.cache.size > this.size) {
+                        this.cache.delete(this.cache.keys().next().value)
+                    }
+                };
+            }
+            const cache = new LRUCache(2);
+            cache.put(1,1);
+            cache.put(2,2);
+            console.log(cache.get(1));
+            cache.put(3,3);
+            console.log(cache.get(2));
+            cache.put(3,3);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>reducer</title>
+    </head>
+    <body>
+        <script>
+           const arr = [1,2,3,4,5];
+        //    const res = arr.reduce((pre, cur, index) => {
+        //         console.log('pre:',pre)
+        //         console.log('cur:',cur)
+        //         console.log('index:',index)
+        //         console.log('-----------------------分割线-------------------------')
+        //         return pre + cur
+        //    }, 4)
+           const res1 = arr.reduceRight((pre, cur, index) => {
+                console.log('pre:', pre)
+                console.log('cur', cur)
+                console.log('index', index)
+                console.log('-----------------------分割线-------------------------')
+                return pre + cur
+           })
+           console.log(res1);
+        </script>
+    </body>
+</html>

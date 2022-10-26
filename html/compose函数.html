@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>compose</title>
+    </head>
+    <body>
+        <script>
+            //当前函数的返回值是下一个函数的参数
+            function fn1(x) {
+                return x + 1;
+            }
+            function fn2(x) {
+                return x + 2;
+            }
+            function fn3(x) {
+                return x + 3;
+            }
+            function fn4(x) {
+                return x + 4;
+            }
+            const compose = (...fn) => {
+                if(fn.length === 0) return (num) => num;
+                if(fn.length === 1) return fn[0];
+                return fn.reduce((pre, cur) => {
+                    console.log(pre)
+                    return (num) => {
+                       return cur(pre(num))
+                    }
+                })
+            }
+            const fn = compose(fn1, fn2, fn3, fn4);
+            console.log(fn);
+            console.log(fn(1)); // 1+2+3+4=11
+        </script>
+    </body>
+</html>
