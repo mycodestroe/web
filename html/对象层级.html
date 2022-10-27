@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>对象层级</title>
+    </head>
+    <body>
+        <script>
+            // 判断一个对象的层级
+            var obj = {
+                a: { b: [1] },
+                c: { d: { e: { f: {r:1} } } },
+                d:1
+            };
+
+            function loopLevel(obj) {
+                var res = 1;
+                function objChild(o, level) {
+                    for (let key in o) {
+                        const temp = o[key];
+                        if (typeof temp === 'object' && temp != null) {
+                            objChild(temp, level + 1);
+                        } else {
+                            res = level + 1 > res ? level + 1 : res;
+                        }
+                    }
+                }
+                objChild(obj, 0);
+                return res;
+            }
+            console.log(loopLevel(obj)); // 5
+        </script>
+    </body>
+</html>

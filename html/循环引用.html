@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>循环引用</title>
+    </head>
+    <body>
+        <script>
+            // 判断一个对象有没有循环引用
+            var obj = {
+                a: {
+                    c: [1, 2],
+                },
+                b: 1,
+            };
+            obj.a.d = obj;
+            function cycleDetector(obj) {
+                const objArr = [obj];
+                let flag = false;
+                function objChild(o) {
+                    for (let key in o) {
+                        const temp = o[key];
+                        if (typeof temp === 'object' && temp != null) {
+                            if (objArr.includes(temp)) {
+                                flag = true;
+                                return;
+                            }
+                            objArr.push(temp);
+                            objChild(temp);
+                        }
+                    }
+                    
+                }
+                objChild(obj);
+                return flag;
+            }
+            console.log(cycleDetector(obj)); // true
+        </script>
+    </body>
+</html>
