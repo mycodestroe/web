@@ -44,3 +44,7 @@
 ### git cherry-pick '版本号' "将其他分支提交代码拉到本分支"
 ### git stash 暂存当前修改 可以切换分支后释放
 ### git stash pop 在当前分支释放最后一次暂存 释放后会删除记录
+### github 秘钥生成
+### ls -al ~/.ssh 查看是否存在秘钥 公钥文件名默认为 id_rsa.pub id_ecdsa.pub id_ed25519.pub
+### 秘钥创建 ssh-keygen -t rsa -C "764350764@qq.com"
+### 找到 .ssh 目录下 id_rsa.pub文件 内容全部复制到settings->ssh and gpg keys-> new ssh key
