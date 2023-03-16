@@ -14,21 +14,19 @@
                 this.sayHello = function () {
                     console.log(`Hello ${this.name}`);
                 };
+                console.log('我被调用了')
             }
             const person1 = new Person('jimmy', 30);
-            console.log(person1.name);
             // 实现上述new关键字功能
             function newObj(fn, ...args) {
-                console.log(fn.prototype);
                 const obj = {};
                 obj.__proto__ = fn.prototype;
                 // fn.call(obj, ...args); // 平铺参数
                 fn.apply(obj, args); // 参数是数组
-                console.log(args);
                 return obj;
             }
-            const person2 = newObj(Person, 'wang', 30);
-           person2.sayHello()
+            const person2 = newObj(Person, '王德磊', 30);
+            person2.sayHello()
         </script>
     </body>
 </html>

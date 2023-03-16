@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+</head>
+<body>
+    <script>
+        const Person = function () {
+            this.type='构造函数Person'
+            this.sayHello = function(name,age) {
+                this.type='构造函数Person的sayHello方法'
+                console.log(`hello ${name}, 年龄：${age}`)
+            }
+            
+        }
+        const Child = {};
+        const Child1 = {};
+        const Child2 = new Person();
+        const p1 = new Person('王德磊')
+        // p1.sayHello.call(Child,'王德磊','ss'); // 立即执行
+        p1.sayHello.apply(Child,['王德磊','ss']); // 立即执行 得到返回值
+        // const childHello = p1.sayHello.bind(Child,'王德磊','ss'); // 返回绑定后的函数
+        // console.log(childHello)
+        // childHello(); // 执行后才会改变this指向
+        console.log(Child) 
+        Person.call(Child1);
+        console.log(Child2);
+    </script>
+</body>
+</html>
