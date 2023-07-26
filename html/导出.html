@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Convert Long HTML to Multiple PDF Pages using jsPDF and html2canvas
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+        <style>
+            body {
+                font-family: Arial;
+            }
+
+            .page-break {
+                page-break-after: always;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>
+            Convert Long HTML to Multiple PDF Pages using jsPDF and html2canvas
+        </h1>
+        <div id="content">
+            <!-- Page 1 content -->
+            <p>This is some sample content for the first page.</p>
+            <img
+                src="https://images.unsplash.com/photo-1534126511673-b68996578166"
+            />
+
+            <div class="page-break"></div>
+
+            <!-- Page 2 content -->
+            <p>This is some sample content for the second page.</p>
+            <img
+                src="https://images.unsplash.com/photo-1521747116042-5a810fda9664"
+            />
+
+            <div class="page-break"></div>
+
+            <!-- Page 3 content -->
+            <p>This is some sample content for the third page.</p>
+            <img
+                src="https://images.unsplash.com/photo-1534126511673-b68996578166"
+            />
+        </div>
+        <button onclick="generatePDF()">Generate PDF</button>
+        <script>
+            function generatePDF() {
+                // Get HTML content of the div
+                var content = document.getElementById('content');
+
+                // Create a new PDF document using jspdf
+                var doc = new jsPDF({
+                    orientation: 'p',
+                    unit: 'px',
+                    format: 'a4',
+                });
+
+                // Set initial y position for each page
+                var y = 15;
+
+                // Loop through each page
+                for (var i = 0; i < content.children.length; i++) {
+                    // Use html2canvas to create a canvas from the HTML content of the current page
+                    html2canvas(content.children[i]).then(function (canvas) {
+                        // Add image of the current page to the PDF document
+                        var imgData = canvas.toDataURL('image/png');
+                        doc.addImage(imgData, 'PNG', 15, y);
+
+                        // Increment the y position for the next page
+                        y += canvas.height + 15;
+
+                        // If there are more pages, add a new page and repeat the process
+                        if (i < content.children.length - 1) {
+                            doc.addPage();
+                        }
+
+                        // If this is the last page, save the PDF document
+                        if (i === content.children.length - 1) {
+                            doc.save('sample.pdf');
+                        }
+                    });
+                }
+            }
+        </script>
+    </body>
+</html>

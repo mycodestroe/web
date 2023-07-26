@@ -8,6 +8,15 @@
     </head>
     <body>
         <script>
+            const obj = {
+                name: 'wdl',
+                age: 30,
+                work: {
+                    a: null,
+                },
+            };
+            const b = obj.work?.a ?? 1;
+            console.log(b);
             const ajax = {
                 get: (url, fn) => {
                     const xhr = new XMLHttpRequest();
