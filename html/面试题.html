@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta cash />
+    <title>面试题</title>
+  </head>
+  <body>
+    <script>
+      // var foo = function (x, y) {
+      //   return x - y;
+      // };
+      // function foo(x, y) {
+      //   return x + y;
+      // }
+      // var num = foo(1, 2);
+      // console.log(num); // -1
+
+      // const number = 5 - "3" + "2" - parseInt("3F");
+      // console.log(number); // 19
+
+      // function A(x) {
+      //   this.x = x;
+      //   this.exec = function () {
+      //     return this.x * 2;
+      //   };
+      // }
+
+      // function B(x) {
+      //   this.x = x;
+      //   this.execB = function () {
+      //     return this.exec() + 1;
+      //   };
+      // }
+      // B.prototype = new A(2);
+      // var b = new B(1);
+      // console.log(b.execB()); // 3
+
+      // var count = 3;
+      // var user = {
+      //   count: 1,
+      //   getCount: function () {
+      //     return () => {
+      //       return this.count;
+      //     };
+      //   },
+      // };
+      // var user_2 = {
+      //   count: 2,
+      // };
+      // var func = user.getCount();
+      // console.log(func.call(user_2)); // 1
+      // console.log("----------------------------------------------------");
+      // new Promise(function (resolve) {
+      //   console.log(1);
+      //   Promise.resolve().then(() => console.log(2));
+      //   resolve(
+      //     new Promise(function (resolve) {
+      //       console.log(3);
+      //       resolve(4);
+      //     })
+      //   );
+      // }).then((res) => console.log(res));
+      // console.log(5);
+      // 1 3 5 2 4
+      // console.log("----------------------分割线------------------------------");
+      // const promise = new Promise((resolve, reject) => {
+      //   console.log(1);
+      //   resolve(3);
+      //   console.log(2);
+      // });
+
+      // promise.then((res) => {
+      //   console.log(res);
+      // });
+
+      // console.log(4);
+      // console.log("----------------------分割线------------------------------");
+      // const promise1 = new Promise((resolve, reject) => {
+      //   console.log(1);
+      //   setTimeout(() => {
+      //     console.log(2);
+      //     resolve();
+      //     console.log(3);
+      //   });
+      // });
+
+      // promise1.then(() => {
+      //   console.log(4);
+      // });
+
+      // console.log(5); // 1 5 2 3 4
+      console.log("----------------------分割线------------------------------");
+      // const promise1 = new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     resolve();
+      //   }, 1000);
+      // });
+      // const promise2 = promise1.catch(() => {
+      //   return 2;
+      // });
+
+      // console.log("promise1", promise1);
+      // console.log("promise2", promise2);
+
+      // setTimeout(() => {
+      //   console.log("promise1", promise1);
+      //   console.log("promise2", promise2);
+      // }, 2000);
+
+      // async function m() {
+      //   const n = await 1;
+      //   console.log(n);
+      // }
+
+      // m();
+      // console.log(2); // 2 1
+
+      // async function m() {
+      //   const n = await 1;
+      //   console.log(n);
+      // }
+
+      // (async () => {
+      //   await m();
+      //   console.log(2);
+      // })();
+
+      // console.log(3); // 3 1 2
+
+      // async function m1(m) {
+      //   return m;
+      // }
+
+      // async function m2(m) {
+      //   const n = await m1(m);
+      //   console.log(n);
+      //   return 2;
+      // }
+
+      // async function m3(m) {
+      //   const n = m2(m);
+      //   console.log(n);
+      //   return "mm";
+      // }
+
+      // m3("m3").then((n) => {
+      //   console.log(n);
+      // });
+
+      // m3("m4");
+
+      // console.log(4); // promise promise  4 m3 mm m4
+
+      Promise.resolve(1)
+        .then(2)
+        .then(Promise.resolve(3).then(console.log))
+        .then((res) => console.log(res));
+    </script>
+  </body>
+</html>
