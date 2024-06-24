@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>观察者模式</title>
+    </head>
+    <body>
+        <div id="name">姓名</div>
+        <div id="age">年龄</div>
+        <input id="inputName" type="text" placeholder="请输入姓名" />
+        <input id="inputAge" placeholder="请输入年龄" />
+        <script>
+            const domName = document.getElementById('name');
+            const domAge = document.getElementById('age');
+            const domIptName = document.getElementById('inputName');
+            const domIptAge = document.getElementById('inputAge');
+            domIptName.oninput = (e) => {
+                reactiveUser.name = e.target.value;
+            };
+            domIptAge.oninput = (e) => {
+                reactiveUser.age = e.target.value;
+            };
+            const user = {
+                name: 'wdl',
+                age: 30,
+            };
+
+            const observer = (obs) => {
+                return new Proxy(user, {
+                    get(target, propertyKey) {
+                        return Reflect.get(target, propertyKey);
+                    },
+                    set(target, propertyKey, value) {
+                        Reflect.set(target, propertyKey, value);
+                        render();
+                    },
+                });
+            };
+            const reactiveUser = observer(user);
+            const render = () => {
+                domName.innerHTML = `姓名：${reactiveUser.name}`;
+                domAge.innerHTML = `年龄：${reactiveUser.age}`;
+                domIptName.value = reactiveUser.name;
+                domIptAge.value = reactiveUser.age;
+            };
+            render();
+        </script>
+    </body>
+</html>
